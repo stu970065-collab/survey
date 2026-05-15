@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>問卷調查</title>
+<title>投資決策行為調查問卷</title>
+
+<!-- OG tags for LINE / FB preview -->
+<meta property="og:title" content="投資決策行為調查問卷" />
+<meta property="og:description" content="本問卷為學術研究之用，旨在探討投資資訊呈現方式與個人特質對投資決策之影響。約需 5 分鐘，所有資料僅供學術統計分析使用。國立政治大學企業管理研究所" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://www.gstatic.com/images/branding/product/2x/forms_2020q4_48dp.png" />
+
+<!-- Twitter / iMessage -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="投資決策行為調查問卷" />
+<meta name="twitter:description" content="本問卷為學術研究之用，旨在探討投資資訊呈現方式與個人特質對投資決策之影響。約需 5 分鐘，所有資料僅供學術統計分析使用。國立政治大學企業管理研究所" />
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -45,6 +57,7 @@
     font-size: 14px;
     color: #888;
     margin-bottom: 2rem;
+    line-height: 1.6;
   }
   .spinner {
     width: 36px;
@@ -66,16 +79,24 @@
 <body>
 <div class="card">
   <div class="icon">📋</div>
-  <h1>問卷調查</h1>
-  <p class="subtitle">感謝您參與本研究</p>
+  <h1>投資決策行為調查問卷</h1>
+  <p class="subtitle">國立政治大學企業管理研究所<br>正在開啟問卷，請稍候…</p>
   <div class="spinner"></div>
-  <p class="msg">正在為您開啟問卷，請稍候…</p>
+  <p class="msg">約需 5 分鐘，感謝您撥冗填答！</p>
 </div>
 
 <script>
+  var count = parseInt(localStorage.getItem('surveyCount') || '0');
   var formA = "https://docs.google.com/forms/d/e/1FAIpQLSew7idCoqPyFhj_ExYAUGm3F7exQqYE49ktUqilo0FkYiijPA/viewform?usp=publish-editor";
   var formB = "https://docs.google.com/forms/d/e/1FAIpQLSeyz0zQnLdCx0kbicMPryV1ICHYHnKcd_Ubzie7m7bTIBpxqA/viewform?usp=sharing&ouid=105075769516156827986";
-  var target = Math.random() < 0.5 ? formA : formB;
+  // A 比 B 多 13 份，先連續導向 B 13 次追平，之後再交替
+  var target;
+  if (count < 13) {
+    target = formB;
+  } else {
+    target = ((count - 13) % 2 === 0) ? formA : formB;
+  }
+  localStorage.setItem('surveyCount', count + 1);
   setTimeout(function() {
     window.location.href = target;
   }, 800);
