@@ -89,12 +89,12 @@
   var count = parseInt(localStorage.getItem('surveyCount') || '0');
   var formA = "https://docs.google.com/forms/d/e/1FAIpQLSew7idCoqPyFhj_ExYAUGm3F7exQqYE49ktUqilo0FkYiijPA/viewform?usp=publish-editor";
   var formB = "https://docs.google.com/forms/d/e/1FAIpQLSeyz0zQnLdCx0kbicMPryV1ICHYHnKcd_Ubzie7m7bTIBpxqA/viewform?usp=sharing&ouid=105075769516156827986";
-  // A 比 B 多 13 份，先連續導向 B 13 次追平，之後再交替
+  // B 比 A 多，先連續導向 A 13 次追平，之後再交替
   var target;
   if (count < 13) {
-    target = formB;
+    target = formA;
   } else {
-    target = ((count - 13) % 2 === 0) ? formA : formB;
+    target = ((count - 13) % 2 === 0) ? formB : formA;
   }
   localStorage.setItem('surveyCount', count + 1);
   setTimeout(function() {
