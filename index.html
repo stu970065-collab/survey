@@ -86,12 +86,9 @@
 </div>
 
 <script>
-  var count = parseInt(localStorage.getItem('surveyCount') || '0');
-  localStorage.setItem('surveyCount', count + 1);
   var formA = "https://docs.google.com/forms/d/e/1FAIpQLSeyz0zQnLdCx0kbicMPryV1ICHYHnKcd_Ubzie7m7bTIBpxqA/viewform?usp=header";
   var formB = "https://docs.google.com/forms/d/e/1FAIpQLSew7idCoqPyFhj_ExYAUGm3F7exQqYE49ktUqilo0FkYiijPA/viewform?usp=header";
-  // A 比 B 少 13 份，先連續導向 A 13 次追平，之後純隨機
-  var target = (count < 13) ? formA : (Math.random() < 0.5 ? formA : formB);
+  var target = Math.random() < 0.5 ? formA : formB;
   setTimeout(function() {
     window.location.href = target;
   }, 800);
